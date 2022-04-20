@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "root",
+    "password": "gims",
+    "database": "transkredit_loan",
+    "host": "10.10.10.95",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "root",
+    "password": "gims",
+    "database": "database_test",
+    "host": "10.10.10.95",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "root",
+    "password": "gims",
+    "database": "database_production",
+    "host": "10.10.10.95",
+    "dialect": "mysql"
+  }
+}
