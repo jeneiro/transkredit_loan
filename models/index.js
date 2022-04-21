@@ -39,6 +39,9 @@ db.sequelize = sequelize;
 db.Loan.hasMany(db.ExistingLoan)
 db.ExistingLoan.belongsTo(db.Loan)
 
+db.Individual.hasMany(db.Loan)
+db.Loan.belongsTo(db.Individual)
+
 db.Corporate.hasMany(db.Director)
 db.Director.belongsTo(db.Corporate)
 

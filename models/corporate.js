@@ -74,7 +74,13 @@ module.exports =  (sequelize, DataTypes)=>{
   
         tin:{
             type:DataTypes.STRING, 
+            required:true,
+            allowNull: false,
         },
+        isCorporative:{type:DataTypes.ENUM("true","false"),
+        required:true,
+        allowNull: false,
+    }
         
      
 
