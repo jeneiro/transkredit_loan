@@ -3,45 +3,49 @@ const { Corporate } = require("../models");
 //add Passport
 const addCorporate = async (req, res) => {
   try {
+    const {id} =req.params
     const {
       category,
       companyName,
       doi,
-      registrationName,
+      registrationNumber,
       countryOfRegistration,
       date,
       typeOfBusiness,
       sector,
       OperatingAddress,
-      corporateAddress,
+      CorporateAddress,
       email,
       phoneNumber,
       scumlRegNo,
       tin,
-      isCorporative
+      
     } = req.body;
     const corporate = await Corporate.create({
       category: category,
       companyName: companyName,
       doi: doi,
-      registrationName: registrationName,
+      date: Date.now(),
+      registrationNumber: registrationNumber,
       countryOfRegistration: countryOfRegistration,
-      date: date,
+     
       typeOfBusiness: typeOfBusiness,
       sector: sector,
       OperatingAddress: OperatingAddress,
-      corporateAddress: corporateAddress,
+      CorporateAddress: CorporateAddress,
       email: email,
       phoneNumber: phoneNumber,
       scumlRegNo: scumlRegNo,
       tin: tin,
-      isCorporative:isCorporative
+      isCorporative:true,
+      AuthId:id,
+     
     });
-    res.status(200).json({ msg: "success" }).send(corporate);
+   return res.status(200).json({ msg: "success", corporate:corporate }).send(corporate);
   } catch (err) {
     console.log(err);
 
-    res.status(500).send(err);
+    return res.status(500).send(err);
   }
 };
 

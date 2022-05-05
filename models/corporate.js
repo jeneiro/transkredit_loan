@@ -10,7 +10,7 @@ module.exports =  (sequelize, DataTypes)=>{
             required:true,
             allowNull: false,  
         },
-        registrationName:{
+        registrationNumber:{
             type: DataTypes.STRING,
             allowNull: false,
             validate:{
@@ -66,7 +66,7 @@ module.exports =  (sequelize, DataTypes)=>{
             allowNull: false, 
         },
         scumlRegNo:{
-            type:DataTypes.DATE,
+            type:DataTypes.STRING,
             required:true,
             allowNull: false, 
 
@@ -82,7 +82,10 @@ module.exports =  (sequelize, DataTypes)=>{
         allowNull: false,
     }
         ,
-        
+        AuthId:{ type: DataTypes.INTEGER,
+            required:true,
+            allowNull: false,
+        }   
      
 
     }) 
