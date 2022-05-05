@@ -2,9 +2,10 @@ const {NextOfKin} = require("../models");
 //add Next Of Kin
 const addNextOfKin = async (req, res) => {
     try {
-      const { name, email, relationship, phone,address, IndividualId } = req.body;
+      const {id}=req.params;
+      const { name, email, relationship, phone,address } = req.body;
       const nextOfKin = await NextOfKin.create({
-        IndividualId: IndividualId,
+        IndividualId: id,
         name: name,
         phone:phone,
         address:address,

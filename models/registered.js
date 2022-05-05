@@ -1,19 +1,19 @@
 module.exports = (sequelize, DataTypes) => {
-    const Passport = sequelize.define("Passport", {
-      passport: {
-        type: DataTypes.TEXT,
+    const Registered = sequelize.define("Registered", {
+      isRegistered: {
+        type: DataTypes.BOOLEAN,
         allowNull: false,
         validate: {
           notEmpty: true,
         },
       },
-    
-      IndividualId:{
+      AuthId:{
         type: DataTypes.INTEGER,
         required:true,
-        allowNull:false
-    }
+       
+    },
+   
     })
-    return Passport
+    return Registered
     }
 

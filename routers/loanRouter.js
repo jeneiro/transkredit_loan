@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const loan= require("../controllers/loanController")
+const auth = require("../middleware/auth");
 
-router.post("/",loan.addLoan);
+router.post("/",auth,loan.addLoan);
 
 module.exports = router;

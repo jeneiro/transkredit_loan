@@ -2,32 +2,34 @@ const { Auth } = require("../models");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { Op } = require("@sequelize/core");
+const {Registered} = require("../models");
 //add user
-const register = async (req, res) => {
+const register = async (req, res, next) => {
   try {
     const { email, username, password, verifypassword } = req.body;
     if (!email || !password || !username || !verifypassword) {
       res
         .status(400)
-        .json({ "error message": "please enter all required fields" })
+        .json({ "errorMessage": "please enter all required fields" })
         .send();
+        next
     }
     if (password.length < 6) {
       return res
         .status(400)
-        .json({ "error message": "Password should be at least 6 characters" })
+        .json({ "errorMessage": "Password should be at least 6 characters" })
         .send();
     }
     if (password != verifypassword) {
       return res
         .status(400)
-        .json({ "error message": "Password does not match verified Password" });
+        .json({ "errorMessage": "Password does not match verified Password" });
     }
     const existingUser = await Auth.findOne({ where: { email: email } });
     if (existingUser) {
       return res
         .status(400)
-        .json({ "error message": "Account with this email exist" });
+        .json({ "errorMessage": "Account with this email exist" });
     }
 
     //hash password
@@ -58,7 +60,7 @@ const register = async (req, res) => {
 
     return res.send(userPayload);
   } catch (err) {
-    res.status(500).send();
+    res.status(500).send(err);
   }
 };
 
@@ -83,13 +85,13 @@ const login = async (req, res) => {
       
         return res
           .status(400)
-          .json({ "error message": "please enter all required fields" })
+          .json({ "errorMessage": "please enter all required fields" })
           .send();
       }
       if (!email && !username) {
         return res
         .status(400)
-        .json({ "error message": "please enter all required fields" })
+        .json({ "errorMessage": "please enter all required fields" })
         .send();
     }
     if(email){
@@ -104,7 +106,7 @@ const login = async (req, res) => {
         if (!existinguser) {
           return res
             .status(401)
-            .json({ "error message": "Wrong Email or Password" })
+            .json({ "errorMessage": "Wrong Email or Password" })
             .send();
         }
        
@@ -117,7 +119,7 @@ const login = async (req, res) => {
         if (!passwordcorrect) {
           return res
             .status(401)
-            .json({ "error message": "Wrong Email or Password" })
+            .json({ "errorMessage": "Wrong Email or Password" })
             .send();
         }
     
@@ -148,7 +150,7 @@ const login = async (req, res) => {
         if (!existinguser) {
           return res
             .status(401)
-            .json({ "error message": "Wrong Email or Password" })
+            .json({ "errorMessage": "Wrong Email or Password" })
             .send();
         }
        
@@ -161,7 +163,7 @@ const login = async (req, res) => {
         if (!passwordcorrect) {
           return res
             .status(401)
-            .json({ "error message": "Wrong Email or Password" })
+            .json({ "errorMessage": "Wrong Email or Password" })
             .send();
         }
     

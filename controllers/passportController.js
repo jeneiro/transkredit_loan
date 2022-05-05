@@ -1,19 +1,21 @@
 const { Passport } = require("../models");
-
+const {Registered}=require("../models");
 //add Passport
 const addPassport = async (req, res) => {
     try {
-      const { IndividualId, passport } = req.body;
+      const {id}=req.params;
+      const {photo } = req.body;
       const newpassport = await Passport.create({
-        IndividualId: IndividualId,
-        passport: passport,
+        IndividualId: id,
+        passport: photo,
        
       });
-      res.status(200).json({ msg: "success" }).send(newpassport);
+    
+    return  res.status(200).json({ msg: "success",  passport:newpassport}).send(newpassport);
     } catch (err) {
       console.log(err);
   
-      res.status(500).send(err);
+     return res.status(500).send(err);
     }
   };
 

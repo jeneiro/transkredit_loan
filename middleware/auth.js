@@ -4,6 +4,7 @@ function auth (req, res, next){
     try {
 
       // const token = req.cookies.token;
+      console.log(req.headers.authorization)
        const token = req.headers.authorization;
        
 

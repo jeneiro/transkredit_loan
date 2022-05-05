@@ -3,9 +3,10 @@ const { Bank } = require("../models");
 //add Passport
 const addBank = async (req, res) => {
   try {
-    const { bankName, accountNumber, accountName, IndividualId } = req.body;
+    const {id}=req.params;
+    const { bankName, accountNumber, accountName } = req.body;
     const bank = await Bank.create({
-      IndividualId: IndividualId,
+      IndividualId: id,
       bankName: bankName,
       accountNumber: accountNumber,
       accountName: accountName,

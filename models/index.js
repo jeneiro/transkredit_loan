@@ -36,6 +36,15 @@ db.sequelize = sequelize;
 //db.Sequelize = Sequelize;
 
 //Associations
+db.Auth.hasOne(db.Individual)
+db.Individual.belongsTo(db.Auth)
+
+db.Auth.hasOne(db.Corporate)
+db.Corporate.belongsTo(db.Auth)
+
+db.Auth.hasOne(db.Registered)
+db.Registered.belongsTo(db.Auth)
+
 db.Loan.hasMany(db.ExistingLoan)
 db.ExistingLoan.belongsTo(db.Loan)
 
@@ -44,6 +53,9 @@ db.Loan.belongsTo(db.Individual)
 
 db.Corporate.hasMany(db.Director)
 db.Director.belongsTo(db.Corporate)
+
+db.Corporate.hasMany(db.Individual)
+db.Individual.belongsTo(db.Corporate)
 
 db.Individual.hasOne(db.NextOfKin)
 db.NextOfKin.belongsTo(db.Individual)

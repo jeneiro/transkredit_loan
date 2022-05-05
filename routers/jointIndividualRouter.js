@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const jointIndividualController = require("../controllers/jointIndividualController")
 
-router.post("/",jointIndividualController.addJointIndividual);
+const auth = require("../middleware/auth");
+router.post("/",auth,jointIndividualController.addJointIndividual);
 
 module.exports = router;

@@ -5,7 +5,7 @@ module.exports =  (sequelize, DataTypes)=>{
             allowNull: false,
         },
         bvn:{
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING,
             required:true,
             allowNull: false,  
         },
@@ -22,11 +22,9 @@ module.exports =  (sequelize, DataTypes)=>{
            
         },
         date:{
-            type: DataTypes.INTEGER,
+            type: DataTypes.DATE,
             allowNull: false,
-            validate:{
-                notEmpty: true
-            }
+           required:true
         },
         phone:{
             type: DataTypes.STRING,
@@ -56,8 +54,7 @@ module.exports =  (sequelize, DataTypes)=>{
         },
         stateOfOrigin:{
             type:DataTypes.STRING,
-            required:true,
-            allowNull: false,  
+           
         },
         nationality:{
             type:DataTypes.STRING,
@@ -94,11 +91,19 @@ module.exports =  (sequelize, DataTypes)=>{
             type:DataTypes.STRING, 
         },
         onlineAccess:{
-            type: DataTypes.ENUM("true", "false"),
+            type: DataTypes.BOOLEAN,
+           
+        },
+        AuthId:{
+            type: DataTypes.INTEGER,
             required:true,
             allowNull: false,  
-        }
-
+        },
+        CorporateId:{
+            type: DataTypes.INTEGER,
+              
+        },
+       
     }) 
     return Individual;
 }

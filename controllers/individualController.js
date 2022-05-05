@@ -1,7 +1,11 @@
 const { Individual } = require("../models");
+const {Registered} = require("../models");
+
 //add Next Of Kin
 const addIndividual = async (req, res) => {
   try {
+    const {id} = req.params
+    console.log(id)
     const {
       title,
       name,
@@ -10,7 +14,7 @@ const addIndividual = async (req, res) => {
       dob,
       address,
       motherMaidenName,
-      date,
+    
       phone,
       IndividualId,
       maritalStatus,
@@ -24,6 +28,13 @@ const addIndividual = async (req, res) => {
       tin,
       onlineAccess,
     } = req.body;
+    const existingIndividual = await Individual.findOne({ where: { AuthId: id } });
+    if (existingIndividual) {
+      return res
+        .status(400)
+        .json({ "errorMessage": "Individual already filled form" });
+    }
+
     const individual = await Individual.create({
       title: title,
       IndividualId: IndividualId,
@@ -34,7 +45,7 @@ const addIndividual = async (req, res) => {
       bvn: bvn,
       dob: dob,
       motherMaidenName: motherMaidenName,
-      date: date,
+      date: Date.now(),
       maritalStatus: maritalStatus,
       gender: gender,
       stateOfOrigin: stateOfOrigin,
@@ -45,12 +56,15 @@ const addIndividual = async (req, res) => {
       expiryDate: expiryDate,
       tin: tin,
       onlineAccess: onlineAccess,
+      AuthId:id
     });
-    res.status(200).json({ msg: "success" }).send(individual);
+
+    //
+    return res.status(200).json({ msg: "success", individual:individual}).send(individual);
   } catch (err) {
     console.log(err);
 
-    res.status(500).send(err);
+    res.status(500).json({err:err, msg: "Please fill all required fields" });
   }
 };
 

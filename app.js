@@ -1,8 +1,10 @@
 const express = require('express');
+const cors = require('cors');
 const app = express();
-app.use(express.urlencoded({extended: true}));
+app.use(cors({ origin: "*" }));
+app.use(express.urlencoded({extended: true,limit:'1mb', parameterLimit:1000}));
 require("dotenv").config();
-app.use(express.json()) 
+app.use(express.json({limit:"1mb"})) 
 const db = require('./models')
 
 db.sequelize.sync().then((req)=>{
@@ -25,6 +27,9 @@ app.use("/joint-nextofkin", require("./routers/jointNextOfKinRouter"));
 app.use("/loan", require("./routers/loanRouter"));
 app.use("/nextofkin",require("./routers/nextOfKinRouter"))
 app.use("/passport", require("./routers/passportRouter"))
+app.use("/register", require("./routers/registerRouter"));
+app.use("/work-detail",require("./routers/workDetailRouter"))
+app.use("/bank-detail",require("./routers/bankRouter"))
 
 
 

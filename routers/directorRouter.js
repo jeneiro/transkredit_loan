@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const directorController = require("../controllers/directorController")
 
-router.post("/",directorController.addDirector);
+const auth = require("../middleware/auth");
+router.post("/",auth,directorController.addDirector);
 
 module.exports = router;

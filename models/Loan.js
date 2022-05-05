@@ -14,7 +14,7 @@ module.exports =  (sequelize, DataTypes)=>{
             type: DataTypes.ENUM("Direct Debit", "Cheques"),
         },
         existingLoan:{
-            type: DataTypes.ENUM("true","false")
+            type: DataTypes.BOOLEAN,
         }
         ,
         loanAmount:{

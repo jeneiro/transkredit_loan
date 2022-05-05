@@ -77,10 +77,11 @@ module.exports =  (sequelize, DataTypes)=>{
             required:true,
             allowNull: false,
         },
-        isCorporative:{type:DataTypes.ENUM("true","false"),
+        isCorporative:{ type: DataTypes.BOOLEAN,
         required:true,
         allowNull: false,
     }
+        ,
         
      
 

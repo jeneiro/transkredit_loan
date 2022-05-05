@@ -1,9 +1,9 @@
 {
   "development": {
     "username": "root",
-    "password": "gims",
-    "database": "transkredit_loan",
-    "host": "10.10.10.95",
+    "password": "password",
+    "database": "test_server",
+     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "test": {
@@ -21,3 +21,4 @@
     "dialect": "mysql"
   }
 }
+
