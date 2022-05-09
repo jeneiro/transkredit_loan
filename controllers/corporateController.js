@@ -48,5 +48,19 @@ const addCorporate = async (req, res) => {
     return res.status(500).send(err);
   }
 };
+const getCorporate =async(req,res)=>{
+  try {
+    const { id } = req.params;
+    const corporate = await Corporate.findOne({ where: { AuthId: id } });
+    return res
+      .status(200)
+      .json({ msg: "success", corporate: corporate })
+      .send(corporate);
+  } catch (error) {
+    return res.status(500).send(error);
+  }
+ 
+}
 
-module.exports = { addCorporate };
+
+module.exports = { addCorporate, getCorporate };

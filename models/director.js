@@ -5,7 +5,7 @@ module.exports =  (sequelize, DataTypes)=>{
             allowNull: false,
         },
         bvn:{
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING,
             required:true,
             allowNull: false,  
         },
@@ -22,7 +22,7 @@ module.exports =  (sequelize, DataTypes)=>{
            
         },
         date:{
-            type: DataTypes.INTEGER,
+            type: DataTypes.DATE,
             allowNull: false,
             validate:{
                 notEmpty: true
@@ -56,8 +56,7 @@ module.exports =  (sequelize, DataTypes)=>{
         },
         stateOfOrigin:{
             type:DataTypes.STRING,
-            required:true,
-            allowNull: false,  
+             
         },
         nationality:{
             type:DataTypes.STRING,
@@ -88,6 +87,21 @@ module.exports =  (sequelize, DataTypes)=>{
         },
         tin:{
             type:DataTypes.STRING, 
+        },
+        occupation:{
+            type:DataTypes.STRING, 
+            required:true,
+            allowNull: false, 
+        },
+        placeOfWork:{
+            type:DataTypes.STRING, 
+            required:true,
+            allowNull: false, 
+        },
+        natureOfBusiness:{
+            type:DataTypes.STRING, 
+            required:true,
+            allowNull: false, 
         },
         
         address:{

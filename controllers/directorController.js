@@ -3,6 +3,7 @@ const { Director } = require("../models");
 //add Passport
 const addDirector = async (req, res) => {
   try {
+    const { id } = req.params;
     const {
       title,
       name,
@@ -11,9 +12,7 @@ const addDirector = async (req, res) => {
       dob,
       address,
       motherMaidenName,
-      date,
       phone,
-      CorporateId,
       maritalStatus,
       gender,
       stateOfOrigin,
@@ -23,34 +22,60 @@ const addDirector = async (req, res) => {
       issuanceDate,
       expiryDate,
       tin,
+      occupation,
+      placeOfWork,
+      natureOfBusiness,
+      workAddress,
     } = req.body;
     const director = await Director.create({
-        title:title,
+      title: title,
       name: name,
       email: email,
       bvn: bvn,
       dob: dob,
       address: address,
       motherMaidenName: motherMaidenName,
-      date: date,
+      date: Date.now(),
       phone: phone,
-      CorporateId: CorporateId,
+      CorporateId: id,
       maritalStatus: maritalStatus,
       gender: gender,
       stateOfOrigin: stateOfOrigin,
       nationality: nationality,
       meansOfID: meansOfID,
       IDnumber: IDnumber,
-      issuanceDat: issuanceDate,
+      issuanceDate: issuanceDate,
       expiryDate: expiryDate,
       tin: tin,
+      occupation: occupation,
+      natureOfBusiness: natureOfBusiness,
+      placeOfWork: placeOfWork,
+      workAddress: workAddress,
+      CorporateId: id,
     });
-    res.status(200).json({ msg: "success" }).send(director);
+    return res
+      .status(200)
+      .json({ msg: "success", corporate: director })
+      .send(director);
   } catch (err) {
     console.log(err);
 
-    res.status(500).send(err);
+    return res.status(500).send(err);
   }
 };
+const getDirector = async (req, res) => {
+  try {
+    const { id } = req.params;
 
-module.exports = { addDirector };
+    const director = await Director.findAll({ where: { CorporateId: id } });
+    return res
+      .status(200)
+      .json({ msg: "success", directors: director })
+      .send(director);
+  } catch (err) {
+    console.log(err);
+
+    return res.status(500).send(err);
+  }
+};
+module.exports = { addDirector, getDirector };
