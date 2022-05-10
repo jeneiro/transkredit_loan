@@ -51,7 +51,7 @@ const addCorporate = async (req, res) => {
 const getCorporate =async(req,res)=>{
   try {
     const { id } = req.params;
-    const corporate = await Corporate.findOne({ where: { AuthId: id } });
+    const corporate =  Corporate.findOne({ where: { AuthId: id } });
     return res
       .status(200)
       .json({ msg: "success", corporate: corporate })
@@ -61,6 +61,7 @@ const getCorporate =async(req,res)=>{
   }
  
 }
+
 
 
 module.exports = { addCorporate, getCorporate };

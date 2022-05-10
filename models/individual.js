@@ -99,10 +99,9 @@ module.exports =  (sequelize, DataTypes)=>{
             required:true,
             allowNull: false,  
         },
-        CorporateId:{
-            type: DataTypes.INTEGER,
-              
-        },
+       CorporativeId:{
+        type: DataTypes.INTEGER,
+       }
        
     }) 
     return Individual;

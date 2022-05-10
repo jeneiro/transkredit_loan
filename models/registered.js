@@ -7,6 +7,12 @@ module.exports = (sequelize, DataTypes) => {
           notEmpty: true,
         },
       },
+      userType: {
+        type: DataTypes.ENUM("Individual", "Corporate", "Unregistered", "Admin"),
+        defaultValue:"Unregistered",
+        allowNull: false,
+      
+      },
       AuthId:{
         type: DataTypes.INTEGER,
         required:true,

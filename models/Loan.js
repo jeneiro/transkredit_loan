@@ -29,8 +29,19 @@ module.exports =  (sequelize, DataTypes)=>{
             allowNull: false,
             validate:{
                 notEmpty: true
-            }
+            },
+           
+        },
+        status:{
+            type: DataTypes.ENUM("Submitted", "Approved", "Rejected"),
+            defaultValue:"Submitted",
+           
+        },
+        CorporativeId:{
+            type: DataTypes.INTEGER
         }
+        ,
+        
     }) 
     return Loan;
 }

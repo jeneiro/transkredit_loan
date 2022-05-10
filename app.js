@@ -29,7 +29,8 @@ app.use("/nextofkin",require("./routers/nextOfKinRouter"))
 app.use("/passport", require("./routers/passportRouter"))
 app.use("/register", require("./routers/registerRouter"));
 app.use("/work-detail",require("./routers/workDetailRouter"))
-app.use("/bank-detail",require("./routers/bankRouter"))
+app.use("/bank-detail",require("./routers/bankRouter"));
+app.use("/corporative",require("./routers/corporativeRouter"));
 
 
 

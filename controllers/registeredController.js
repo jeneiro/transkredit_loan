@@ -4,11 +4,12 @@ const { Registered } = require("../models");
 const addRegister = async (req, res) => {
   try {
     const { id } = req.params;
-    const { isRegistered } = req.body;
+    const { isRegistered, userType } = req.body;
 
     const register = await Registered.create({
       AuthId: id,
       isRegistered: isRegistered,
+      userType:userType
     });
     return res
       .status(200)
@@ -39,9 +40,9 @@ const updateRegistered = async (req, res) => {
     const { id } = req.params;
 
   
-    const { isRegistered } = req.body;
+    const { isRegistered, userType } = req.body;
     const registered = await Registered.update(
-      { isRegistered: isRegistered },
+      { isRegistered: isRegistered,  userType:userType },
       { where: { AuthId: id } }
     );
     return res

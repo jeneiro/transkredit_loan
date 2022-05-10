@@ -75,6 +75,11 @@ db.Passport.belongsTo(db.Individual)
 db.JointIndividual.hasOne(db.JointNextOfKin)
 db.JointNextOfKin.belongsTo(db.JointIndividual)
 
+db.Corporate.hasOne(db.Corporative)
+db.Corporative.belongsTo(db.Corporate)
+
+
+
 
 
 

@@ -70,7 +70,7 @@ const addIndividual = async (req, res) => {
  const getIndividual =async (req,res)=>{
    try {
      const {id}= req.params
-     const individual= Individual.findOne({where:{AuthId:id}})
+     const individual=  Individual.findOne({where:{AuthId:id}})
      return res.status(200).json({ msg: "success", individual:individual}).send(individual);
    } catch (err) {
     
