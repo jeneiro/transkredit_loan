@@ -31,7 +31,8 @@ app.use("/register", require("./routers/registerRouter"));
 app.use("/work-detail",require("./routers/workDetailRouter"))
 app.use("/bank-detail",require("./routers/bankRouter"));
 app.use("/corporative",require("./routers/corporativeRouter"));
-
+app.use("/joinRequest",require("./routers/joinRequestRouter"));
+app.use("/staff", require("./routers/staffRouter"));
 
 
 

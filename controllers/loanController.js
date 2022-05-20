@@ -2,9 +2,9 @@ const {Loan} = require("../models");
 //add Next Of Kin
 const addLoan = async (req, res) => {
     try {
-      const { date, loanAmount, loanType, repaymentMode,existingLoan, IndividualId, tenor } = req.body;
+      const { loanAmount, loanType, repaymentMode,existingLoan, IndividualId, tenor } = req.body;
       const loan = await Loan.create({
-        date: date,
+        date: Date.now(),
         loanAmount: loanAmount,
         loanType:loanType,
         repaymentMode:repaymentMode,

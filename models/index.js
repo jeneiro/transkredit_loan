@@ -45,11 +45,17 @@ db.Corporate.belongsTo(db.Auth)
 db.Auth.hasOne(db.Registered)
 db.Registered.belongsTo(db.Auth)
 
+db.Corporate.hasMany(db.Staff)
+db.Staff.belongsTo(db.Corporate)
+
 db.Loan.hasMany(db.ExistingLoan)
 db.ExistingLoan.belongsTo(db.Loan)
 
 db.Individual.hasMany(db.Loan)
 db.Loan.belongsTo(db.Individual)
+
+db.Corporate.hasMany(db.Director)
+db.Director.belongsTo(db.Corporate)
 
 db.Corporate.hasMany(db.Director)
 db.Director.belongsTo(db.Corporate)

@@ -31,7 +31,12 @@ const register = async (req, res, next) => {
         .status(400)
         .json({ "errorMessage": "Account with this email exist" });
     }
-
+    const existingUsername = await Auth.findOne({ where: { username: username } });
+    if (existingUsername) {
+      return res
+        .status(400)
+        .json({ "errorMessage": "Username already taken" });
+    }
     //hash password
     const salt = await bcrypt.genSalt();
     const passwordHash = await bcrypt.hash(password, salt);

@@ -64,19 +64,19 @@ const addIndividual = async (req, res) => {
   } catch (err) {
     console.log(err);
 
-    res.status(500).json({err:err, msg: "Please fill all required fields" });
+  return  res.status(500).json({err:err, msg: "Please fill all required fields" });
   }
 };
  const getIndividual =async (req,res)=>{
    try {
      const {id}= req.params
-     const individual=  Individual.findOne({where:{AuthId:id}})
-     return res.status(200).json({ msg: "success", individual:individual}).send(individual);
+     const individual= await  Individual.findOne({ where: { AuthId: id } });
+     return res.status(200).json({ msg: "success", individual:individual});
    } catch (err) {
     
     console.log(err);
 
-    res.status(500).json({err:err}); 
+    return res.status(500).json({err:err}); 
    }
  }
 module.exports = { addIndividual , getIndividual};

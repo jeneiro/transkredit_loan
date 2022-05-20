@@ -51,11 +51,11 @@ const addCorporate = async (req, res) => {
 const getCorporate =async(req,res)=>{
   try {
     const { id } = req.params;
-    const corporate =  Corporate.findOne({ where: { AuthId: id } });
+    const corporate = await Corporate.findOne({ where: { AuthId: id } });
     return res
       .status(200)
       .json({ msg: "success", corporate: corporate })
-      .send(corporate);
+    
   } catch (error) {
     return res.status(500).send(error);
   }

@@ -33,8 +33,8 @@ module.exports =  (sequelize, DataTypes)=>{
            
         },
         status:{
-            type: DataTypes.ENUM("Submitted", "Approved", "Rejected"),
-            defaultValue:"Submitted",
+            type: DataTypes.ENUM("Pending", "Approved", "Rejected"),
+            defaultValue:"Pending",
            
         },
         CorporativeId:{
