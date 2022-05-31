@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+
 const app = express();
 app.use(cors({ origin: "*" }));
 app.use(express.urlencoded({extended: true,limit:'1mb', parameterLimit:1000}));
@@ -14,6 +15,8 @@ db.sequelize.sync().then((req)=>{
 }
   
 )
+app.use(express.static(__dirname + '/documents'));
+app.use('/documents', express.static('documents'));
 
 app.use("/user", require("./routers/userRouter"));
 app.use("/auth", require("./routers/authRouter"));
@@ -33,6 +36,8 @@ app.use("/bank-detail",require("./routers/bankRouter"));
 app.use("/corporative",require("./routers/corporativeRouter"));
 app.use("/joinRequest",require("./routers/joinRequestRouter"));
 app.use("/staff", require("./routers/staffRouter"));
+app.use("/admin", require("./routers/adminRouter"))
+app.use("/documents", require("./routers/documentRouter"))
 
 
 

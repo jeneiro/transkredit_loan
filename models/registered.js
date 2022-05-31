@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       userType: {
-        type: DataTypes.ENUM("Individual", "Corporate", "Corporative Member", "Unregistered", "Admin"),
+        type: DataTypes.ENUM("Individual", "Corporate", "Cooporative Member", "Unregistered", "Admin"),
         defaultValue:"Unregistered",
         allowNull: false,
       

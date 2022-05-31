@@ -6,4 +6,5 @@ router.post("/:id",auth,corporativeController.addCorporative);
 router.get("/:id",auth,corporativeController.getCorporative)
 router.get("/",auth,corporativeController.getAllCorporative)
 
+
 module.exports = router;

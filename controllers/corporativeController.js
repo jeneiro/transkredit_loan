@@ -1,4 +1,5 @@
-const { Corporative } = require("../models");
+const { Corporative, Loan} = require("../models");
+
 
 const addCorporative = async (req, res) => {
   try {
@@ -53,5 +54,6 @@ const getAllCorporative = async (req, res) => {
     return res.status(500).send(error);
   }
 };
+
 
 module.exports = { addCorporative, getCorporative, getAllCorporative };
