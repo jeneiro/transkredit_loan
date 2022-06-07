@@ -38,8 +38,6 @@ const getRegistered = async (req, res) => {
 const updateRegistered = async (req, res) => {
   try {
     const { id } = req.params;
-
-  
     const { isRegistered, userType } = req.body;
     const registered = await Registered.update(
       { isRegistered: isRegistered,  userType:userType },

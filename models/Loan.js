@@ -29,6 +29,14 @@ module.exports =  (sequelize, DataTypes)=>{
                 notEmpty: true
             }
         }, 
+        
+        username:{
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate:{
+                notEmpty: true
+            }
+        },
         tenor:{
             type: DataTypes.INTEGER,
             allowNull: false,

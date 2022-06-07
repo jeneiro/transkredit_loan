@@ -29,6 +29,28 @@ const addIndividual = async (req, res) => {
       onlineAccess,
     } = req.body;
     const existingIndividual = await Individual.findOne({ where: { AuthId: id } });
+    if (existingIndividual){
+      const corporate = await Corporate.update({title,
+        name,
+        email,
+        bvn,
+        dob,
+        address,
+        motherMaidenName,
+        phone,
+        IndividualId,
+        maritalStatus,
+        gender,
+        stateOfOrigin,
+        nationality,
+        meansOfID,
+        IDnumber,
+        issuanceDate,
+        expiryDate,
+        tin,
+        onlineAccess,}, { where: { AuthId: id } })
+        return res.status(200).json({ msg: "success updated", data:existingIndividual }); 
+    }
     if (existingIndividual) {
       return res
         .status(400)

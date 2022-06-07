@@ -21,6 +21,27 @@ const addCorporate = async (req, res) => {
       tin,
       
     } = req.body;
+    const exists = await Corporate.findOne({where: {AuthId: id}})
+    if (exists){
+      const corporate = await Corporate.update({category: category,
+        companyName: companyName,
+        doi: doi,
+        date: Date.now(),
+        registrationNumber: registrationNumber,
+        countryOfRegistration: countryOfRegistration,
+        typeOfBusiness: typeOfBusiness,
+        sector: sector,
+        OperatingAddress: OperatingAddress,
+        CorporateAddress: CorporateAddress,
+        email: email,
+        phoneNumber: phoneNumber,
+        scumlRegNo: scumlRegNo,
+        tin: tin,
+        isCorporative:true,
+        AuthId:id}, { where: { AuthId: id } })
+        return res.status(200).json({ msg: "success updated", corporate:exists }); 
+    }
+    
     const corporate = await Corporate.create({
       category: category,
       companyName: companyName,

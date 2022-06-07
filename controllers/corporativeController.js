@@ -27,6 +27,23 @@ const addCorporative = async (req, res) => {
   }
   return;
 };
+ const updateCooporative = async (req, res) => {
+   try {
+    const { id } = req.params;
+    const { name } = req.body;
+    const updatedCooporative = await Corporative.update( {
+      name: name,
+    },{ where: { CorporateId: id } });
+
+    return res
+    .status(200)
+    .json({ msg: "corporative updated successfully", data: updatedCooporative })
+    
+   } catch (err) {
+     return res.status(500).send(err);
+     
+   }
+ }
 
 const getCorporative = async (req, res) => {
   try {
@@ -56,4 +73,4 @@ const getAllCorporative = async (req, res) => {
 };
 
 
-module.exports = { addCorporative, getCorporative, getAllCorporative };
+module.exports = { addCorporative, getCorporative, getAllCorporative, updateCooporative};

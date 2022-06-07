@@ -5,13 +5,22 @@ const addJoinRequest = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const { name, CorporateId, IndividualName, StaffId } = req.body;
+    const { name, CorporateId, IndividualName, StaffId, document} = req.body;
     const exist = await Staff.findOne({
       where: { StaffId: StaffId, CorporateId: CorporateId },
     });
     if (!exist) {
       return res.status(500).json({
         msg: "User has not been profiled by Corporative, Please contact your Corporative",
+      });
+    }
+    const accepted =await JoinRequest.findOne({
+      where: { AuthId: id, CorporateId: CorporateId, Status: "Approved" },
+    });
+
+    if (accepted){
+      return res.status(500).json({
+        msg: "User already registered with Staff ID, Please contact your Corporative",
       });
     }
     const reTrial = await JoinRequest.findOne({
@@ -33,6 +42,7 @@ const addJoinRequest = async (req, res) => {
       CorporateId: CorporateId,
       CorporativeName: name,
       IndividualName: IndividualName,
+      document:document
     });
     return res.status(200).json({ msg: "success", data: join });
   } catch (err) {

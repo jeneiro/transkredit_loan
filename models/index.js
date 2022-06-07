@@ -36,6 +36,8 @@ db.sequelize = sequelize;
 //db.Sequelize = Sequelize;
 
 //Associations
+
+
 db.Auth.hasOne(db.Individual)
 db.Individual.belongsTo(db.Auth)
 

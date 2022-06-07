@@ -1,4 +1,5 @@
 const { Loan } = require("../models");
+
 //add Next Of Kin
 const addLoan = async (req, res) => {
   try {
@@ -11,6 +12,7 @@ const addLoan = async (req, res) => {
       IndividualId,
       tenor,
       CorporateId,
+      username
     } = req.body;
     const loan = await Loan.create({
       date: Date.now(),
@@ -22,6 +24,7 @@ const addLoan = async (req, res) => {
       tenor: tenor,
       CorporateId: CorporateId,
       AuthId: id,
+      username:username
     });
     res.status(200).json({ msg: "success" }).send(loan);
   } catch (err) {
@@ -93,6 +96,32 @@ const getSettledLoanList = async (req, res) => {
     const { id } = req.params;
     const loan = await Loan.findAll({
       where: { AuthId: id, repaymentStatus: "Completed" },
+    });
+    res.status(200).json({ msg: "success", data: loan }).send(loan);
+  } catch (err) {
+    console.log(err);
+
+    res.status(500).send(err);
+  }
+};
+const getSettledLoanListCorporate = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const loan = await Loan.findAll({
+      where: { CorporateId: id, repaymentStatus: "Completed" },
+    });
+    res.status(200).json({ msg: "success", data: loan }).send(loan);
+  } catch (err) {
+    console.log(err);
+
+    res.status(500).send(err);
+  }
+};
+const getApprovedLoanListCorporate = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const loan = await Loan.findAll({
+      where: { CorporateId: id, status: "Approved" },
     });
     res.status(200).json({ msg: "success", data: loan }).send(loan);
   } catch (err) {
@@ -181,5 +210,7 @@ module.exports = {
   getPendingLoanListByCorporateId,
   SubmitLoanRequest,
   getAllApprovedLoan,
-  completeRepayment
+  completeRepayment,
+  getSettledLoanListCorporate,
+  getApprovedLoanListCorporate
 };

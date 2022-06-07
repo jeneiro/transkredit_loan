@@ -27,6 +27,14 @@ module.exports = (sequelize, DataTypes) => {
       required: true,
       allowNull: false,
     },
+    document: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+      },
+    },
+
     Status: {
       type: DataTypes.ENUM("Pending", "Approved", "Rejected"),
       defaultValue: "Pending",

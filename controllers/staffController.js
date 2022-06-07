@@ -124,5 +124,17 @@ const getPendingList = async (req, res) => {
     res.status(500).send(err);  
     }
 }
+const getStaffbyStaffId = async(req, res)=>{
+  try {
+    const {id, CorporateId} = req.params;
+    const staff = await Staff.findOne({where:{staffId:id, CorporateId}})
+    return res.json({msg:"successfull", data:staff})
+      
+  } catch (err) {
 
-module.exports = { addStaffList, getStaffList, getPendingList, getApprovedList, deleteStaff, addStaff, getStaffbyAuthId};
+     console.log(err);
+
+  res.status(500).send(err);  
+  }
+}
+module.exports = { addStaffList, getStaffList, getPendingList, getApprovedList, deleteStaff, addStaff, getStaffbyAuthId,getStaffbyStaffId};

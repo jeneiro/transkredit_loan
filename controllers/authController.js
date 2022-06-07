@@ -1,8 +1,7 @@
 const { Auth } = require("../models");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const { Op } = require("@sequelize/core");
-const {Registered} = require("../models");
+
 //add user
 const register = async (req, res, next) => {
   try {
@@ -68,7 +67,16 @@ const register = async (req, res, next) => {
     res.status(500).send(err);
   }
 };
+const getAllUsers =async (req, res) => {
+  try {
+    
 
+    const allusers = await Auth.findAll();
+    return res.status(200).json({ msg: "success", data: allusers });
+  } catch (err) {
+    return res.status(500).send();
+  }
+};
 const deleteAccount = async (req, res) => {
   try {
     const { id } = req.params;
@@ -193,4 +201,4 @@ const login = async (req, res) => {
     res.status(500).send();
   }
 };
-module.exports = { register, deleteAccount, login };
+module.exports = { register, deleteAccount, login, getAllUsers};
