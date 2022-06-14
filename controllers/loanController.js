@@ -12,7 +12,8 @@ const addLoan = async (req, res) => {
       IndividualId,
       tenor,
       CorporateId,
-      username
+      username,
+      Status
     } = req.body;
     const loan = await Loan.create({
       date: Date.now(),
@@ -24,13 +25,14 @@ const addLoan = async (req, res) => {
       tenor: tenor,
       CorporateId: CorporateId,
       AuthId: id,
-      username:username
+      username:username,
+      status:Status
     });
-    res.status(200).json({ msg: "success" }).send(loan);
+    return res.status(200).json({ msg: "success" }).send(loan);
   } catch (err) {
     console.log(err);
 
-    res.status(500).send(err);
+    return res.status(500).send(err);
   }
 };
 
@@ -40,11 +42,11 @@ const getPendingLoanListByCorporateId = async (req, res) => {
     const loan = await Loan.findAll({
       where: { CorporateId: id, status: "Pending" },
     });
-    res.status(200).json({ msg: "success", data: loan }).send(loan);
+   return res.status(200).json({ msg: "success", data: loan }).send(loan);
   } catch (err) {
     console.log(err);
 
-    res.status(500).send(err);
+    return res.status(500).send(err);
   }
 };
 const getLoanList = async (req, res) => {
@@ -123,7 +125,7 @@ const getApprovedLoanListCorporate = async (req, res) => {
     const loan = await Loan.findAll({
       where: { CorporateId: id, status: "Approved" },
     });
-    res.status(200).json({ msg: "success", data: loan }).send(loan);
+    return res.status(200).json({ msg: "success", data: loan }).send(loan);
   } catch (err) {
     console.log(err);
 
@@ -137,7 +139,7 @@ const SubmitLoanRequest = async (req, res) => {
       { status: "Submitted" },
       { where: { id: id } }
     );
-    res.status(200).json({ msg: "success", data: loan }).send(loan);
+    return  res.status(200).json({ msg: "success", data: loan }).send(loan);
   } catch (err) {
     console.log(err);
 
@@ -151,7 +153,7 @@ const completeRepayment = async (req, res) => {
       {  repaymentStatus: "Completed" },
       { where: { id: id } }
     );
-    res.status(200).json({ msg: "success", data: loan }).send(loan);
+    return  res.status(200).json({ msg: "success", data: loan }).send(loan);
   } catch (err) {
     console.log(err);
 
@@ -179,11 +181,11 @@ const RejectLoanRequest = async (req, res) => {
       { status: "Rejected" },
       { where: { id: id } }
     );
-    res.status(200).json({ msg: "success", data: loan }).send(loan);
+    return res.status(200).json({ msg: "success", data: loan }).send(loan);
   } catch (err) {
     console.log(err);
 
-    res.status(500).send(err);
+    return res.status(500).send(err);
   }
 };
 
@@ -191,11 +193,11 @@ const getLoanListByCorporateId = async (req, res) => {
   try {
     const { id } = req.params;
     const loan = await Loan.findAll({ where: { CorporateId: id } });
-    res.status(200).json({ msg: "success", data: loan }).send(loan);
+    return res.status(200).json({ msg: "success", data: loan }).send(loan);
   } catch (err) {
     console.log(err);
 
-    res.status(500).send(err);
+    return res.status(500).send(err);
   }
 };
 module.exports = {

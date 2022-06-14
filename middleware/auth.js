@@ -2,21 +2,20 @@ const jwt = require("jsonwebtoken")
 
 function auth (req, res, next){
     try {
-
-      // const token = req.cookies.token;
-      console.log(req.headers.authorization)
-       const token = req.headers.authorization;
+      
+       const token = req.headers.authorization.split(' ')[1];
        
 
        if (!token) return  res.status(401).json({errorMessage:"Unauthorized"});
-      const verified = jwt.verify(token, process.env.JWT_SECRET);
-      console.log(verified);
-      req.user = verified.user;
-      next();
+       jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+        if (err) return res.status(403).json({errorMessag:"Forbidden"})
+        req.user = user;
+        next();});
+      
         
     } catch (err){
       
-        res.status(401).json({errorMessage:"Unauthorized"});
+      return  res.status(401).json({errorMessage:"Unauthorized"});
     }
 
 }

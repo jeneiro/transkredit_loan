@@ -38,7 +38,7 @@ app.use("/joinRequest",require("./routers/joinRequestRouter"));
 app.use("/staff", require("./routers/staffRouter"));
 app.use("/admin", require("./routers/adminRouter"))
 app.use("/documents", require("./routers/documentRouter"))
-
+app.use("/email", require("./routers/emailRouter"))
 
 
 
