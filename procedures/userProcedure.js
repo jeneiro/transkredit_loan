@@ -24,6 +24,28 @@ const allIndividualAccounts = async (req, res) => {
     return res.status(500).send();
   }
 };
+const allCorporateAccounts = async (req, res) => {
+
+  const procedureQuery = "call all_corporate_accounts()";
+  try {
+    await db.sequelize.query(procedureQuery).then((data) => {
+      return res.status(200).json({ msg: "success", data: data});
+    });
+  } catch (err) {
+    return res.status(500).send();
+  }
+};
+const allCooporativeMemberAccounts = async (req, res) => {
+
+  const procedureQuery = "call all_cooporative_member_accounts()";
+  try {
+    await db.sequelize.query(procedureQuery).then((data) => {
+      return res.status(200).json({ msg: "success", data: data});
+    });
+  } catch (err) {
+    return res.status(500).send();
+  }
+};
 const individualDetail = async (req, res) => {
   const { id } = req.params;
   const procedureQuery = 'CALL individual_detail(:IndividualId)';
@@ -37,4 +59,4 @@ const individualDetail = async (req, res) => {
     return res.status(500).send();
   }
 };
-module.exports = { user , individualDetail, allIndividualAccounts};
+module.exports = { user , individualDetail, allIndividualAccounts, allCorporateAccounts, allCooporativeMemberAccounts};

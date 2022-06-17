@@ -11,17 +11,17 @@ const addJoinRequest = async (req, res) => {
     });
     if (!exist) {
       return res.status(500).json({
-        msg: "User has not been profiled by Corporative, Please contact your Corporative",
+        msg: "User has not been profiled by Cooperative, Please contact your Cooperative",
       });
     }
     const accepted =await JoinRequest.findOne({
-      where: { AuthId: id, CorporateId: CorporateId, Status: "Approved" },
+      where: { StaffId: StaffId, CorporateId: CorporateId, Status: "Approved" },
     });
 
     if (accepted){
       return res.status(500).json({
-        msg: "User already registered with Staff ID, Please contact your Corporative",
-      });
+        msg: "User already registered with Staff ID, Please contact your Cooperative",
+      }).send("User already registered with Staff ID, Please contact your Cooperative",);
     }
     const reTrial = await JoinRequest.findOne({
       where: { AuthId: id, CorporateId: CorporateId, Status: "Rejected" },
@@ -111,13 +111,13 @@ const approveJoinRequest = async (req, res) => {
       { Status: "Approved" },
       { where: { id: id, StaffId: staffId, corporateId: corporateId } }
     );
-    const create = await Staff.create({
+    const create = await Staff.update({
       fullName: fullName,
       CorporateId: corporateId,
       staffId: staffId,
       Status: "Approved",
       AuthId: AuthId,
-    });
+    }, { where: { staffId: staffId}});
     return res.status(200).json({ msg: "Request Approved", staff: create });
   } catch (error) {
     return res.status(500).send(error);

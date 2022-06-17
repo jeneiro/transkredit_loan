@@ -39,6 +39,9 @@ app.use("/staff", require("./routers/staffRouter"));
 app.use("/admin", require("./routers/adminRouter"))
 app.use("/documents", require("./routers/documentRouter"))
 app.use("/email", require("./routers/emailRouter"))
+app.use("/loan-schedule", require("./routers/loanScheduleRouter"))
+app.use("/interest-rate", require("./routers/interestRateRouter"))
+app.use("/cooperative-member-kyc", require("./routers/cooperativeMemberKYCRouter"))
 
 
 

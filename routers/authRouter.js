@@ -6,4 +6,5 @@ router.post("/register",authController.register);
 router.post("/delete/:id",authController.deleteAccount);
 router.get("/", auth,authController.getAllUsers )
 router.post("/update-password",authController.updatePassword)
+router.get("/:id",authController.getUserbyAuthId)
 module.exports = router;

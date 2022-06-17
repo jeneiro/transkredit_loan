@@ -20,8 +20,11 @@ module.exports =  (sequelize, DataTypes)=>{
         },
         IndividualId:{
             type: DataTypes.INTEGER,
-            required:true,
-            allowNull:false
+           
+        },
+       AuthId:{
+            type: DataTypes.INTEGER,
+           
         }
       
     })

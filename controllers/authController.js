@@ -183,9 +183,9 @@ const login = async (req, res) => {
           user: existinguser._id,
         },
         process.env.JWT_SECRET,
-        {
-          expiresIn: "120s", // it will be expired after 120s
-        }
+        // {
+        //   expiresIn: "120s", // it will be expired after 120s
+        // }
       );
 
       //Refresh token
@@ -225,4 +225,21 @@ const updatePassword = async (req, res) => {
   }
 
 }
-module.exports = { register, deleteAccount, login, getAllUsers, updatePassword };
+
+const getUserbyAuthId = async (req, res) => {
+  try {
+    const { id }= req.params;
+    
+
+    const user = await Auth.findOne(
+    
+      { where: { id: id } }
+    );
+    return res.status(200).json({"msg":"Password Updated successfully", data: user});
+    
+  } catch (error) {
+    return res.status(500).send(error);
+  }
+
+}
+module.exports = { register, deleteAccount, login, getAllUsers, updatePassword, getUserbyAuthId };

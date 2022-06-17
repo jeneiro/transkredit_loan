@@ -28,7 +28,7 @@ const addLoan = async (req, res) => {
       username:username,
       status:Status
     });
-    return res.status(200).json({ msg: "success" }).send(loan);
+    return res.status(200).json({ msg: "success", data:loan });
   } catch (err) {
     console.log(err);
 
@@ -76,7 +76,6 @@ const getAllApprovedLoan= async (req, res) => {
     return res.status(200).json({ data:loan });
   } catch (err) {
     console.log(err);
-
    return res.status(500).send(err);
   }
 };
@@ -177,8 +176,9 @@ const ApproveLoanRequest = async (req, res) => {
 const RejectLoanRequest = async (req, res) => {
   try {
     const { id } = req.params;
+    const{message} = req.body;
     const loan = await Loan.update(
-      { status: "Rejected" },
+      { status: "Rejected", message: message },
       { where: { id: id } }
     );
     return res.status(200).json({ msg: "success", data: loan }).send(loan);

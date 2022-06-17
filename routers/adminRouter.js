@@ -11,6 +11,8 @@ router.post("/complete-repayment/:id",loanController.completeRepayment);
 router.get("/email", procedure.user)
 router.get("/individual-detail/:id", procedure.individualDetail)
 router.get("/all-individual-accounts",procedure.allIndividualAccounts);
+router.get("/all-corporate-accounts",procedure.allCorporateAccounts);
+router.get("/all-cooporative-member-accounts",procedure.allCooporativeMemberAccounts);
 
 
 

@@ -37,6 +37,10 @@ module.exports =  (sequelize, DataTypes)=>{
                 notEmpty: true
             }
         },
+        message:{
+            type: DataTypes.STRING,
+           
+        },
         tenor:{
             type: DataTypes.INTEGER,
             allowNull: false,
@@ -66,6 +70,8 @@ module.exports =  (sequelize, DataTypes)=>{
                 notEmpty: true
             }
         },
+
+
       
         
     }) 
