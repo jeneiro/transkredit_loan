@@ -78,8 +78,7 @@ db.JointIndividual.belongsTo(db.Individual)
 db.Individual.hasOne(db.Bank)
 db.Bank.belongsTo(db.Individual)
 
-db.Individual.hasOne(db.Passport)
-db.Passport.belongsTo(db.Individual)
+
 
 db.JointIndividual.hasOne(db.JointNextOfKin)
 db.JointNextOfKin.belongsTo(db.JointIndividual)

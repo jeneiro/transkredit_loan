@@ -60,7 +60,7 @@ const getCooperativeMemberKYC = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const getKYC = await CooperativeMemberKYC.findOne({ where: { Auth: id } });
+    const getKYC = await CooperativeMemberKYC.findOne({ where: { AuthId: id } });
     return res.status(200).json({ msg: "success", data: getKYC });
   } catch (err) {
     console.log(err);

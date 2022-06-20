@@ -4,14 +4,17 @@ const {Registered}=require("../models");
 const addPassport = async (req, res) => {
     try {
       const {id}=req.params;
-      const {photo } = req.body;
+      const {photo, individualId } = req.body;
+    
+
       const newpassport = await Passport.create({
-        IndividualId: id,
+        AuthId:id,
+        IndividualId: individualId,
         passport: photo,
        
       });
     
-    return  res.status(200).json({ msg: "success",  passport:newpassport}).send(newpassport);
+    return  res.status(200).json({ msg: "success", data: newpassport});
     } catch (err) {
       console.log(err);
   

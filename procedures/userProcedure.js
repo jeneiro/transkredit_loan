@@ -59,4 +59,19 @@ const individualDetail = async (req, res) => {
     return res.status(500).send();
   }
 };
-module.exports = { user , individualDetail, allIndividualAccounts, allCorporateAccounts, allCooporativeMemberAccounts};
+
+const cooperativeMemberDetail = async (req, res) => {
+  const { id } = req.params;
+  const procedureQuery = 'CALL cooperative_member_detail(:AuthId)';
+  try {
+    await db.sequelize.query(procedureQuery, 
+    {replacements: { AuthId: id }}).then((data) => {
+     
+      return res.status(200).json({ msg: "success", data: data[0] });
+    });
+  } catch (err) {
+    return res.status(500).send();
+  }
+};
+
+module.exports = { user , individualDetail, allIndividualAccounts, allCorporateAccounts, allCooporativeMemberAccounts, cooperativeMemberDetail};
