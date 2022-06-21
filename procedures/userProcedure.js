@@ -59,6 +59,19 @@ const individualDetail = async (req, res) => {
     return res.status(500).send();
   }
 };
+const corporateDetail = async (req, res) => {
+  const { id } = req.params;
+  const procedureQuery = 'CALL corporate_detail(:CorporateId)';
+  try {
+    await db.sequelize.query(procedureQuery, 
+    {replacements: { CorporateId: id }}).then((data) => {
+     
+      return res.status(200).json({ msg: "success", data: data[0] });
+    });
+  } catch (err) {
+    return res.status(500).send();
+  }
+};
 
 const cooperativeMemberDetail = async (req, res) => {
   const { id } = req.params;
@@ -74,4 +87,4 @@ const cooperativeMemberDetail = async (req, res) => {
   }
 };
 
-module.exports = { user , individualDetail, allIndividualAccounts, allCorporateAccounts, allCooporativeMemberAccounts, cooperativeMemberDetail};
+module.exports = { user ,corporateDetail, individualDetail, allIndividualAccounts, allCorporateAccounts, allCooporativeMemberAccounts, cooperativeMemberDetail};
