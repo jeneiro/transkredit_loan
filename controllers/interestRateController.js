@@ -2,14 +2,15 @@ const { InterestRate } = require("../models");
 
 const addInterestRate = async (req, res) => {
   try {
-  
     const { rate } = req.body;
+    const date = Date.now();
+
     const interest = await InterestRate.create({
-      date: Date.now(),
+      date: date,
       rate: rate,
     });
 
-    return res.status(200).json({ msg: "success", data: interest });
+    return res.status(200).json({ data: interest });
   } catch (err) {
     console.log(err);
 
@@ -18,15 +19,11 @@ const addInterestRate = async (req, res) => {
 };
 const getInterestRate = async (req, res) => {
   try {
-   
     const interest = await InterestRate.findAll({
-        limit: 1,
-        order: [ [ 'createdAt', 'DESC' ]]
-      })
-    return res
-      .status(200)
-      .json({ msg: "success", data: interest })
-      .send(loan);
+      limit: 1,
+      order: [["createdAt", "DESC"]],
+    });
+    return res.status(200).json({ msg: "success", data: interest })
   } catch (err) {
     console.log(err);
 
@@ -34,6 +31,6 @@ const getInterestRate = async (req, res) => {
   }
 };
 module.exports = {
-    addInterestRate,
-    getInterestRate,
+  addInterestRate,
+  getInterestRate,
 };

@@ -2,6 +2,7 @@ const { JointIndividual } = require("../models");
 //add Next Of Kin
 const addJointIndividual = async (req, res) => {
   try {
+    const {id} =req.params;
     const {
       title,
       name,
@@ -10,7 +11,6 @@ const addJointIndividual = async (req, res) => {
       dob,
       address,
       motherMaidenName,
-      date,
       phone,
       IndividualId,
       maritalStatus,
@@ -23,9 +23,10 @@ const addJointIndividual = async (req, res) => {
       relationship,
       expiryDate,
       tin,
-      onlineAccess,
+     
     } = req.body;
     const jointindividual = await JointIndividual.create({
+      AuthId:id,
       relationship: relationship,
       title: title,
       IndividualId: IndividualId,
@@ -36,7 +37,7 @@ const addJointIndividual = async (req, res) => {
       bvn: bvn,
       dob: dob,
       motherMaidenName: motherMaidenName,
-      date: date,
+      date: Date.now(),
       maritalStatus: maritalStatus,
       gender: gender,
       stateOfOrigin: stateOfOrigin,
@@ -46,14 +47,23 @@ const addJointIndividual = async (req, res) => {
       issuanceDate: issuanceDate,
       expiryDate: expiryDate,
       tin: tin,
-      onlineAccess: onlineAccess,
+    
     });
-    res.status(200).json({ msg: "success" }).send(jointindividual);
+    res.status(200).json({ msg: "success", data:jointindividual});
   } catch (err) {
     console.log(err);
 
-    res.status(500).send(err);
+    return res.status(500).send(err);
   }
 };
-
-module.exports = { addJointIndividual };
+const getJointIndividual =async (req, res) =>{
+  try {
+    const { id}= req.params;
+    const jointindividual = await JointIndividual.findOne({ where:{AuthId:id}  });
+    return res.status(200).json({data:jointindividual});
+    
+  } catch (err) {
+    return res.status(500).send(err);
+  }
+}
+module.exports = { addJointIndividual, getJointIndividual };

@@ -13,7 +13,6 @@ const addRegister = async (req, res) => {
     });
     return res
       .status(200)
-      .json({ msg: "success" })
       .send("isRegistered" + register);
   } catch (err) {
     console.log(err);
@@ -46,7 +45,7 @@ const updateRegistered = async (req, res) => {
     return res
       .status(200)
       .json({ msg: "success", registered: registered })
-      .send(registered);
+    
   } catch (error) {
     return res.status(500).send(error);
   }

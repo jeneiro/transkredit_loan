@@ -29,6 +29,13 @@ module.exports =  (sequelize, DataTypes)=>{
                 notEmpty: true
             }
         }, 
+        totalRepayment:{
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate:{
+                notEmpty: true
+            }
+        }, 
         
         username:{
             type: DataTypes.STRING,

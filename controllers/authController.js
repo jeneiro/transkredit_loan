@@ -10,14 +10,14 @@ const register = async (req, res, next) => {
       res
         .status(400)
         .json({ errorMessage: "please enter all required fields" })
-        .send();
+      
       next;
     }
     if (password.length < 6) {
       return res
         .status(400)
         .json({ errorMessage: "Password should be at least 6 characters" })
-        .send();
+    
     }
     if (password != verifypassword) {
       return res

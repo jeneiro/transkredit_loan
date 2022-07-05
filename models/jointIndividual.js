@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
     bvn: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       required: true,
       allowNull: false,
     },
@@ -28,11 +28,8 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
     date: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.DATE,
       allowNull: false,
-      validate: {
-        notEmpty: true,
-      },
     },
     phone: {
       type: DataTypes.STRING,
@@ -68,8 +65,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     stateOfOrigin: {
       type: DataTypes.STRING,
-      required: true,
-      allowNull: false,
+     
     },
     nationality: {
       type: DataTypes.STRING,

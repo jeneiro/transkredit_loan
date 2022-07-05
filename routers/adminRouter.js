@@ -13,7 +13,7 @@ router.get("/individual-detail/:id", procedure.individualDetail)
 router.get("/all-individual-accounts",procedure.allIndividualAccounts);
 router.get("/all-corporate-accounts",procedure.allCorporateAccounts);
 router.get("/all-cooporative-member-accounts",procedure.allCooporativeMemberAccounts);
-router.get("/corporate-detail/:id", procedure.corporateDetail); 
+router.get("/corporate-detail/:id", procedure.corporateDetail);
 
 
 module.exports = router;

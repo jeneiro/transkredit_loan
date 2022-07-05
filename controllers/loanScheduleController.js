@@ -27,7 +27,24 @@ const getLoanScheduleById = async (req, res) => {
     return res
       .status(200)
       .json({ msg: "success", data: loanSchedule })
-      .send(loan);
+   
+  } catch (err) {
+    console.log(err);
+
+    return res.status(500).send(err);
+  }
+};
+const approveLoanScheduleById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const loanSchedule = await LoanSchedule.update(
+      { status: "Paid" },{
+      where: { id: id },
+    });
+    return res
+      .status(200)
+      .json({ msg: "success", data: loanSchedule })
+   
   } catch (err) {
     console.log(err);
 
@@ -37,4 +54,5 @@ const getLoanScheduleById = async (req, res) => {
 module.exports = {
   addLoanSchedule,
   getLoanScheduleById,
+  approveLoanScheduleById
 };

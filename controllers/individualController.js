@@ -82,7 +82,7 @@ const addIndividual = async (req, res) => {
     });
 
     //
-    return res.status(200).json({ msg: "success", individual:individual}).send(individual);
+    return res.status(200).json({ msg: "success", individual:individual})
   } catch (err) {
     console.log(err);
 
@@ -98,7 +98,7 @@ const addIndividual = async (req, res) => {
     
     console.log(err);
 
-    return res.status(500).json({err:err}); 
+    return res.status(500).json({err:err, msg:"error"}); 
    }
  }
 module.exports = { addIndividual , getIndividual};

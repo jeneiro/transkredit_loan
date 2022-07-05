@@ -13,7 +13,7 @@ const addStaffList = async (req, res) => {
       }
       const existing = await Staff.findOne({ where: { staffid: staffid, CorporateId:id } });
       if (existing) {
-        return res.json("User with" + staffid + "already exist");
+        return res.status(400).json({msg:"User with" + staffid + "already exist"});
       }
       const staff = await Staff.create({
         fullName: fullname,
@@ -24,11 +24,11 @@ const addStaffList = async (req, res) => {
       return staff;
     });
 
-    res.status(200).json({ msg: "Staff List Added" });
+    return res.status(200).json({ msg: "Staff List Added", data:staff});
   } catch (err) {
     console.log(err);
 
-    res.status(500).send(err);
+   return res.status(500).send(err);
   }
 };
 
@@ -55,6 +55,7 @@ const addStaff = async  (req, res) => {
         res.status(500).send(err);
       }
 }
+
 const getStaffList = async (req, res) => {
   try {
     const {id} = req.params;

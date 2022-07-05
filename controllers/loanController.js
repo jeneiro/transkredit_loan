@@ -13,7 +13,8 @@ const addLoan = async (req, res) => {
       tenor,
       CorporateId,
       username,
-      Status
+      Status,
+      totalRepayment,
     } = req.body;
     const loan = await Loan.create({
       date: Date.now(),
@@ -22,13 +23,14 @@ const addLoan = async (req, res) => {
       repaymentMode: repaymentMode,
       existingLoan: existingLoan,
       IndividualId: IndividualId,
+      totalRepayment: totalRepayment,
       tenor: tenor,
       CorporateId: CorporateId,
       AuthId: id,
-      username:username,
-      status:Status
+      username: username,
+      status: Status,
     });
-    return res.status(200).json({ msg: "success", data:loan });
+    return res.status(200).json({ msg: "success", data: loan });
   } catch (err) {
     console.log(err);
 
@@ -42,7 +44,7 @@ const getPendingLoanListByCorporateId = async (req, res) => {
     const loan = await Loan.findAll({
       where: { CorporateId: id, status: "Pending" },
     });
-   return res.status(200).json({ msg: "success", data: loan }).send(loan);
+    return res.status(200).json({ msg: "success", data: loan }).send(loan);
   } catch (err) {
     console.log(err);
 
@@ -63,20 +65,20 @@ const getLoanList = async (req, res) => {
 const getAllPendingLoanList = async (req, res) => {
   try {
     const loan = await Loan.findAll({ where: { status: "Submitted" } });
-    return res.status(200).json({ data:loan });
+    return res.status(200).json({ data: loan });
   } catch (err) {
     console.log(err);
 
-   return res.status(500).send(err);
+    return res.status(500).send(err);
   }
 };
-const getAllApprovedLoan= async (req, res) => {
+const getAllApprovedLoan = async (req, res) => {
   try {
     const loan = await Loan.findAll({ where: { status: "Approved" } });
-    return res.status(200).json({ data:loan });
+    return res.status(200).json({ data: loan });
   } catch (err) {
     console.log(err);
-   return res.status(500).send(err);
+    return res.status(500).send(err);
   }
 };
 const getApprovedLoanList = async (req, res) => {
@@ -138,7 +140,7 @@ const SubmitLoanRequest = async (req, res) => {
       { status: "Submitted" },
       { where: { id: id } }
     );
-    return  res.status(200).json({ msg: "success", data: loan }).send(loan);
+    return res.status(200).json({ msg: "success", data: loan }).send(loan);
   } catch (err) {
     console.log(err);
 
@@ -149,10 +151,10 @@ const completeRepayment = async (req, res) => {
   try {
     const { id } = req.params;
     const loan = await Loan.update(
-      {  repaymentStatus: "Completed" },
+      { repaymentStatus: "Completed" },
       { where: { id: id } }
     );
-    return  res.status(200).json({ msg: "success", data: loan }).send(loan);
+    return res.status(200).json({ msg: "success", data: loan }).send(loan);
   } catch (err) {
     console.log(err);
 
@@ -176,7 +178,7 @@ const ApproveLoanRequest = async (req, res) => {
 const RejectLoanRequest = async (req, res) => {
   try {
     const { id } = req.params;
-    const{message} = req.body;
+    const { message } = req.body;
     const loan = await Loan.update(
       { status: "Rejected", message: message },
       { where: { id: id } }
@@ -214,5 +216,5 @@ module.exports = {
   getAllApprovedLoan,
   completeRepayment,
   getSettledLoanListCorporate,
-  getApprovedLoanListCorporate
+  getApprovedLoanListCorporate,
 };
