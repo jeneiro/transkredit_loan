@@ -3,6 +3,7 @@ const staffController = require("../controllers/staffController")
 
 router.post("/:id",staffController.addStaffList);
 router.post("/addstaff/:id",staffController.addStaff);
+router.post("/add-one-staff/:id",staffController.addOneStaff);
 router.get("/:id",staffController.getStaffList);
 router.get("/pending/:id",staffController.getPendingList);
 router.get("/approved/:id",staffController.getApprovedList);

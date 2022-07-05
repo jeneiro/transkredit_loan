@@ -56,6 +56,29 @@ const addStaff = async  (req, res) => {
       }
 }
 
+const addOneStaff = async  (req, res) => {
+  try {
+      const { fullName, staffId } = req.body;
+      const { id } = req.params;
+      const exist = await Staff.findOne({where:{CorporateId:id, staffId:staffId}});
+      if (exist){
+         
+          return res.json({msg:"A Staff with ID already exists", addstaff:addstaff})
+      }
+      const addstaff = await Staff.create({
+          fullName: fullName,
+          CorporateId: id,
+          staffId: staffId,
+          Status: "No Request",
+        });
+        return res.json({msg:"request made successfull", data:addstaff})
+  } catch (err) {
+      console.log(err);
+  
+      res.status(500).send(err);
+    }
+}
+
 const getStaffList = async (req, res) => {
   try {
     const {id} = req.params;
@@ -138,4 +161,4 @@ const getStaffbyStaffId = async(req, res)=>{
   res.status(500).send(err);  
   }
 }
-module.exports = { addStaffList, getStaffList, getPendingList, getApprovedList, deleteStaff, addStaff, getStaffbyAuthId,getStaffbyStaffId};
+module.exports = { addOneStaff, addStaffList, getStaffList, getPendingList, getApprovedList, deleteStaff, addStaff, getStaffbyAuthId,getStaffbyStaffId};
